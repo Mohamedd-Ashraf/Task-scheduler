@@ -7,10 +7,14 @@ void main() {
   runApp(const MyApp());
 }
 
+late Database data;
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+  
 
-  // This widget is the root of your application.
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,13 +56,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-@override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+// @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
 
-    createDataBase();
-  }
+//     createDataBase();
+//   }
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -69,26 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return (Tasks());
   }
+  
 
-  void createDataBase() async {
-    Database data =
-        await openDatabase('tasks2.db', version: 1, onCreate: ((data, version) {
-      data.execute(
-          "CREATE TABLE Tasks (id INTEGER PRIMARY KEY , date TEXT , status TEXT , title TEXT , time TEXT )").then((value) {
-           print("Table is createed");
-          }
-          ).catchError((onError){
-            print(onError);
-          });
 
-      print("Data base is Created");
-    }
-
-    ),
-    onOpen: (db) {
-      print("dataBase Is opened");
-    },
-    );
-
-  }
 }
