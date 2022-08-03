@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Tasks.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,9 +52,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
-  
-
+    createDataBase();
+  }
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -62,5 +68,27 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return (Tasks());
+  }
+
+  void createDataBase() async {
+    Database data =
+        await openDatabase('tasks2.db', version: 1, onCreate: ((data, version) {
+      data.execute(
+          "CREATE TABLE Tasks (id INTEGER PRIMARY KEY , date TEXT , status TEXT , title TEXT , time TEXT )").then((value) {
+           print("Table is createed");
+          }
+          ).catchError((onError){
+            print(onError);
+          });
+
+      print("Data base is Created");
+    }
+
+    ),
+    onOpen: (db) {
+      print("dataBase Is opened");
+    },
+    );
+
   }
 }
