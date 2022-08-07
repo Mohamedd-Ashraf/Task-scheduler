@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Business_Logic/cubit/chracters_cubit.dart';
 import 'package:flutter_application_1/Constants/MyColors.dart';
 import 'package:flutter_application_1/data/models/chracters.dart';
+import 'package:flutter_application_1/interface/widgets/character_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 late List<Chracter> allChracter;
@@ -46,7 +47,7 @@ Widget buildBlockWidget() {
 }
 
 Widget screenIdacator() {
-  return Center();
+  return Center(child: CircularProgressIndicator(color: MyColors.MyYellow,),);
 }
 
 Widget buildLoadListWidget() {
@@ -68,7 +69,11 @@ Widget buildCharcterList() {
           crossAxisSpacing: 1,
           mainAxisSpacing: 1 ,
           ),
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          padding: EdgeInsets.zero,
       itemBuilder: ((context, index) {
-       retuen CharacterItem();
+        //TODO Not Done
+       return CharacterItem();
       }));
 }
