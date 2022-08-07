@@ -10,7 +10,7 @@ class ChractersRepo {
 
   ChractersRepo(this.webServices);
 
-Future<List<dynamic>> getAllCracters() async {
+Future<List<Chracter>> getAllCracters() async {
   final chracters = await webServices.getAllCracters();
   return chracters.map((chracter) => Chracter.fromJson(chracter)).toList();
 }
