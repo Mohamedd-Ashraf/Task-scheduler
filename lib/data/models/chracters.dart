@@ -1,4 +1,4 @@
-class chracter {
+class Chracter {
 
  late int charId;
  late String name;
@@ -12,7 +12,7 @@ class chracter {
  late List <dynamic> appreanceOfSeasons;
 
 
- chracter.fromJson (Map<String , dynamic> json){
+ Chracter.fromJson (Map<String , dynamic> json){
   charId = json["char_id"];
   name = json["name"];
   nickName = json["nickname"];
