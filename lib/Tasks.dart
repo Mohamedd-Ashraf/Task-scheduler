@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_application_1/Archived.dart';
-import 'package:flutter_application_1/Done.dart';
-import 'package:flutter_application_1/recent.dart';
+
 import 'package:sqflite/sqflite.dart';
-import 'main.dart';
+// import 'interface/main.dart';
 
 class Tasks extends StatefulWidget {
   const Tasks({Key? key}) : super(key: key);
@@ -35,9 +33,7 @@ class _TasksState extends State<Tasks> {
   @override
   int currentIndex = 0;
   List<Widget> CureentScreen = [
-    const RecentScreen(),
-    const DoneScreen(),
-    const ArchivedScreen(),
+ 
   ];
   List<String> CureentAppBar = ["Recent", "Done", "Archived"];
   Widget build(BuildContext context) {
