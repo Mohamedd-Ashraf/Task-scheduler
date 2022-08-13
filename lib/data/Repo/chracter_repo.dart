@@ -1,18 +1,38 @@
 
 
+// import 'package:flutter_application_1/data/models/chracters.dart';
+
+// import '../API/web_services_page.dart';
+
+// class ChractersRepo {
+
+//  final WebServices webServices;
+
+//   ChractersRepo(this.webServices);
+
+// Future<List<Character>> getAllCracters() async {
+//   final chracters = await webServices.getAllCracters();
+//    print(chracters);
+//     return chracters.map((character) => Character.fromJson(character)).toList();
+// }
+  
+// }
+
+
+import 'package:flutter_application_1/data/API/web_services_page.dart';
 import 'package:flutter_application_1/data/models/chracters.dart';
 
-import '../API/web_services_page.dart';
+// import '';
 
-class ChractersRepo {
+class CharactersRepository {
+  final WebServices charactersWebServices;
 
- final WebServices webServices;
+  CharactersRepository(this.charactersWebServices);
 
-  ChractersRepo(this.webServices);
+  Future<List<Character>> getAllCharacters() async {
+    final characters = await charactersWebServices.getAllCracters();
+    return characters.map((character) => Character.fromJson(character)).toList();
+  }
 
-Future<List<Chracter>> getAllCracters() async {
-  final chracters = await webServices.getAllCracters();
-  return chracters.map((chracter) => Chracter.fromJson(chracter)).toList();
-}
-  
+
 }

@@ -10,14 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Constants/Strings.dart';
 
 class AppRouter {
-  Route? generateRoute(RouteSettings settings) {
-    late ChractersRepo chractersRepo;
+    late CharactersRepository chractersRepo;
     late ChractersCubit chractersCubit;
 
     AppRouter() {
-      chractersRepo = ChractersRepo(WebServices());
+      chractersRepo = CharactersRepository(WebServices());
       chractersCubit = ChractersCubit(chractersRepo);
     }
+  Route? generateRoute(RouteSettings settings) {
 
     switch (settings.name) {
       case allChracterScreen:

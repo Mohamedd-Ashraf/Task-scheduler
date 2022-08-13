@@ -5,7 +5,7 @@ import 'package:flutter_application_1/data/models/chracters.dart';
 import 'package:flutter_application_1/interface/widgets/character_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-late List<Chracter> allChracter;
+late List<Character> allChracter;
 
 class ChracterScreen extends StatefulWidget {
   const ChracterScreen({Key? key}) : super(key: key);
@@ -17,6 +17,7 @@ class ChracterScreen extends StatefulWidget {
 class _ChracterScreenState extends State<ChracterScreen> {
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     allChracter = BlocProvider.of<ChractersCubit>(context).getAllCharacters();
@@ -72,8 +73,9 @@ Widget buildCharcterList() {
           shrinkWrap: true,
           physics: const ClampingScrollPhysics(),
           padding: EdgeInsets.zero,
+          itemCount: allChracter.length,
       itemBuilder: ((context, index) {
-        //TODO Not Done
-       return CharacterItem();
+   
+       return CharacterItem(chracter: allChracter[index],);
       }));
 }

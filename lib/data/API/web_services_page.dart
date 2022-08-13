@@ -22,7 +22,7 @@ WebServices(){
   Future<List<dynamic>> getAllCracters() async{
 
     try {
-  Response response = await dio.get('characters');
+      Response response = await dio.get('characters');
   print(response.data.toString());
   return response.data;
 } on Exception catch (e) {

@@ -8,13 +8,14 @@ import 'package:flutter_application_1/data/models/chracters.dart';
 part 'chracters_state.dart';
 
 class ChractersCubit extends Cubit<ChractersState> {
-  late List <Chracter> characters;
-  final ChractersRepo CharRepo;
+  final CharactersRepository CharRepo;
+   List <Character> characters =[];
   ChractersCubit(
     this.CharRepo,
   ) : super(ChractersInitial());
-  List<Chracter> getAllCharacters() {
-    CharRepo.getAllCracters().then((characters) {
+  List<Character> getAllCharacters() {
+    CharRepo.getAllCharacters().then((characters) {
+    
        emit(ChractersIsLoaded(characters));
        this.characters = characters;
     });
