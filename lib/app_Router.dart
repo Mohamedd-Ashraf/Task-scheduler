@@ -24,13 +24,13 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (BuildContext context) => chractersCubit,
-            child: ChracterScreen(),
+            child: CharactersScreen(),
           ),
         );
       
 
       case detialsScreen:
-        return MaterialPageRoute(builder: (_) => ChracterScreen());
+        return MaterialPageRoute(builder: (_) => CharactersScreen());
         
 
       default:
