@@ -12,15 +12,14 @@ import 'Constants/Strings.dart';
 import 'interface/screens/chracters_details.dart';
 
 class AppRouter {
-    late CharactersRepository chractersRepo;
-    late ChractersCubit chractersCubit;
+  late CharactersRepository chractersRepo;
+  late ChractersCubit chractersCubit;
 
-    AppRouter() {
-      chractersRepo = CharactersRepository(WebServices());
-      chractersCubit = ChractersCubit(chractersRepo);
-    }
+  AppRouter() {
+    chractersRepo = CharactersRepository(WebServices());
+    chractersCubit = ChractersCubit(chractersRepo);
+  }
   Route? generateRoute(RouteSettings settings) {
-
     switch (settings.name) {
       case allChracterScreen:
         return MaterialPageRoute(
@@ -29,12 +28,13 @@ class AppRouter {
             child: CharactersScreen(),
           ),
         );
-      
 
       case detialsScreen:
-      final character =settings.arguments as Character;
-        return MaterialPageRoute(builder: (_) => ChracterDetailsScreen(character:character));
-        
+        final character = settings.arguments as Character;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (BuildContext context) => ChractersCubit(chractersRepo) ,
+                child: ChracterDetailsScreen(character: character)));
 
       default:
     }

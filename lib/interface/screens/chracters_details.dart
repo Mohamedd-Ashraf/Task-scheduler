@@ -1,16 +1,26 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/Business_Logic/cubit/chracters_cubit.dart';
 import 'package:flutter_application_1/Constants/MyColors.dart';
 import 'package:flutter_application_1/data/models/chracters.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChracterDetailsScreen extends StatelessWidget {
   final Character character;
   const ChracterDetailsScreen({Key? key, required this.character})
       : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    
+
+   
+    // BlocProvider.of<ChractersCubit>(context).getAllCharacters();
+     BlocProvider.of<ChractersCubit>(context).getCharacterQuote(character.name);
+  
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 58, 58, 58),
       body: CustomScrollView(
@@ -61,6 +71,12 @@ class ChracterDetailsScreen extends StatelessWidget {
                   buildDivider(323),
                   SizedBox(
                     height: 20,
+                  ),
+                  BlocBuilder<ChractersCubit, ChractersState>(
+                    builder: (context, state) {
+                      
+                      return checkIfQuoteIsLoaded(state);
+                    },
                   )
                 ],
               ),
@@ -133,5 +149,49 @@ class ChracterDetailsScreen extends StatelessWidget {
       height: 25,
       thickness: 3,
     );
+  }
+
+  Widget checkIfQuoteIsLoaded(ChractersState state) {
+    if (state is charQuoteIsLoaded) {
+      return displayRandomQuote(state);
+    } else {
+      return showProgressIndcator();
+    }
+  }
+
+  Widget displayRandomQuote(state) {
+    if (state.quote.toString().length>3) {
+      return Center(
+      child: DefaultTextStyle(
+          style: TextStyle(
+             fontFamily: 'Horizon',
+
+            fontSize: 25,
+            color: Color.fromARGB(255, 207, 179, 23),
+            shadows: [
+              Shadow(
+                  blurRadius: 7,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  offset: Offset(2, 5)),
+            ],
+          ),
+          child: AnimatedTextKit(
+
+            // pause: Duration(milliseconds: 10),
+            // repeatForever: true,
+            totalRepeatCount: 1,
+            animatedTexts: [
+               TyperAnimatedText(state.quote.toString().substring(1,state.quote.length-2))
+            ],
+          )),
+    );
+      
+    } else {
+      return Container();
+    }
+  }
+
+  Widget showProgressIndcator() {
+    return Center(child: CircularProgressIndicator(color: MyColors.MyYellow,),);
   }
 }

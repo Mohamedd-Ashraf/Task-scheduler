@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Constants/Strings.dart';
+import 'package:flutter_application_1/data/models/char_Quotes.dart';
 import 'package:flutter_application_1/data/models/chracters.dart';
 
 class WebServices {
@@ -24,6 +25,23 @@ WebServices(){
     try {
       Response response = await dio.get('characters');
   // print(response.data.toString());
+  return response.data;
+} on Exception catch (e) {
+  print(e);
+  return [];
+  // TODO
+}
+
+  }
+
+   
+  Future<List<dynamic>> getCharacterQuote(charName) async{
+
+    try {
+      Response response = await dio.get('quote/random?' , queryParameters: {'author':charName});
+  // print(response.data.toString());
+
+
   return response.data;
 } on Exception catch (e) {
   print(e);

@@ -20,7 +20,11 @@
 
 
 import 'package:flutter_application_1/data/API/web_services_page.dart';
+import 'package:flutter_application_1/data/models/char_Quotes.dart';
 import 'package:flutter_application_1/data/models/chracters.dart';
+
+import '../models/char_Quotes.dart';
+import '../models/char_Quotes.dart';
 
 // import '';
 
@@ -34,5 +38,10 @@ class CharactersRepository {
     return characters.map((character) => Character.fromJson(character)).toList();
   }
 
+Future<String> getCharacterQuote(String charName) async {
+    final charQuote = await charactersWebServices.getCharacterQuote(charName) ;
+    // print(charQuote.map((e) => CharQuote.fromJson(e).Quote));
+    return charQuote.map((e) => CharQuote.fromJson(e).Quote).toString();
+  }
 
 }

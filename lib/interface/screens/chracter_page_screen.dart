@@ -42,6 +42,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<ChractersCubit>(context).getAllCharacters();
+    //  BlocProvider.of<ChractersCubit>(context).getCharacterQuote(characte);
   }
 
   @override

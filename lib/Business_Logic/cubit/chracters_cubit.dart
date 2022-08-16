@@ -10,6 +10,7 @@ part 'chracters_state.dart';
 class ChractersCubit extends Cubit<ChractersState> {
   final CharactersRepository CharRepo;
    List <Character> characters =[];
+    String quote="";
   ChractersCubit(
     this.CharRepo,
   ) : super(ChractersInitial());
@@ -21,6 +22,16 @@ class ChractersCubit extends Cubit<ChractersState> {
     });
 
     return characters ;
+   
+  }
+    String getCharacterQuote(String charName) {
+    CharRepo.getCharacterQuote(charName).then((quote) {
+    
+       emit(charQuoteIsLoaded(quote));
+       this.quote = quote;
+    });
+
+    return quote ;
    
   }
 }

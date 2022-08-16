@@ -24,6 +24,7 @@ class CharacterItem extends StatelessWidget {
       child: InkWell(
         child: GridTile(
           child: Hero(
+
             tag: chracter.charId,
             child: Container(
               color: MyColors.Mygrey,
@@ -53,6 +54,7 @@ class CharacterItem extends StatelessWidget {
           ),
         ),
         onTap: ()=>Navigator.pushNamed(context,detialsScreen, arguments: chracter),
+        // onHover: ,
       ),
     );
   }

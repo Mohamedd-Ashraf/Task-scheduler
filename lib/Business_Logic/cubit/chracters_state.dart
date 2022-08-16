@@ -12,4 +12,11 @@ class ChractersIsLoaded extends ChractersState {
 
 }
 
+class charQuoteIsLoaded extends ChractersState {
+ final String quote;
+
+  charQuoteIsLoaded(this.quote);
+
+}
+
 
