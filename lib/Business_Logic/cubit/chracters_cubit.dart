@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-
 import 'package:flutter_application_1/data/Repo/chracter_repo.dart';
 import 'package:flutter_application_1/data/models/chracters.dart';
+import 'package:meta/meta.dart';
 
 part 'chracters_state.dart';
 

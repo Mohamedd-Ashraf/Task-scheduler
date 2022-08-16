@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Business_Logic/cubit/chracters_cubit.dart';
-import 'package:flutter_application_1/Constants/MyColors.dart';
-import 'package:flutter_application_1/data/models/chracters.dart';
-import 'package:flutter_application_1/interface/widgets/character_item.dart';
+import '../../Business_Logic/cubit/chracters_cubit.dart';
+import '../../Constants/MyColors.dart';
+import '../../data/models/chracters.dart';
+import '../widgets/character_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 
 List<Character> allChracter = [];
 List<Character> tempChracter = [];
@@ -23,12 +24,12 @@ class _CharactersScreenState extends State<CharactersScreen> {
   Widget buildSearchScren() {
     return TextField(
       controller: searchTextControler,
-      cursorColor: MyColors.Mygrey,
+      cursorColor: Color.fromARGB(255, 0, 0, 0),
       decoration: InputDecoration(
           hintText: "Find a Character",
           border: InputBorder.none,
           hintStyle: TextStyle(
-            color: MyColors.MyLightGrey,
+            color: Color.fromARGB(255, 0, 0, 0),
             fontSize: 18,
           )),
       style: TextStyle(color: MyColors.MyLightGrey, fontSize: 18),
@@ -49,16 +50,31 @@ class _CharactersScreenState extends State<CharactersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 50,
         title: isSearching ? buildSearchScren() : buildAppBarTitle(),
         actions: buildappbarAction(),
         leading: isSearching
             ? BackButton(
-                color: MyColors.MyLightGrey,
+                color: Color.fromARGB(255, 0, 0, 0),
               )
             : Container(),
         backgroundColor: MyColors.MyYellow,
       ),
-      body: buildBlockWidget(),
+      body: OfflineBuilder(
+        connectivityBuilder: (
+          BuildContext context,
+          ConnectivityResult connectivity,
+          Widget child,
+        ) {
+          final bool connected = connectivity != ConnectivityResult.none;
+          if (connected) {
+            return buildBlockWidget();
+          } else {
+            return noInternetdWidget();
+          }
+        },
+        child: screenIdacator(),
+      ),
     );
   }
 
@@ -83,7 +99,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
             },
             icon: Icon(
               Icons.clear,
-              color: MyColors.MyLightGrey,
+              color: Color.fromARGB(255, 0, 0, 0),
             ))
       ];
     } else {
@@ -91,7 +107,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
         IconButton(
           onPressed: startSearching,
           icon: Icon(Icons.search),
-          color: MyColors.MyLightGrey,
+          color: Color.fromARGB(255, 0, 0, 0),
         )
       ];
     }
@@ -188,7 +204,31 @@ class _CharactersScreenState extends State<CharactersScreen> {
   Widget buildAppBarTitle() {
     return Text(
       'All Characters',
-      style: TextStyle(color: MyColors.MyLightGrey),
+      style: TextStyle(color: Color.fromARGB(192, 0, 0, 0)),
+    );
+  }
+
+  Widget noInternetdWidget() {
+    return Center(
+      child: Container(
+        color: MyColors.MyWhite,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Can\'t Connect , Check Internet ",
+              style: TextStyle(color: MyColors.Mygrey, fontSize: 22),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Image.asset(
+              'assets/images/noInternet.png',
+              fit: BoxFit.cover,
+            )
+          ],
+        ),
+      ),
     );
   }
 }

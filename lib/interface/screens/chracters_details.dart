@@ -2,9 +2,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_application_1/Business_Logic/cubit/chracters_cubit.dart';
-import 'package:flutter_application_1/Constants/MyColors.dart';
-import 'package:flutter_application_1/data/models/chracters.dart';
+import '../../Business_Logic/cubit/chracters_cubit.dart';
+import '../../Constants/MyColors.dart';
+import '../../data/models/chracters.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChracterDetailsScreen extends StatelessWidget {

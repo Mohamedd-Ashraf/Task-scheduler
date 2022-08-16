@@ -8,6 +8,7 @@ import 'package:flutter_application_1/data/Repo/chracter_repo.dart';
 import 'package:flutter_application_1/data/models/chracters.dart';
 import 'package:flutter_application_1/interface/screens/chracter_page_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'Constants/Strings.dart';
 import 'interface/screens/chracters_details.dart';
 
